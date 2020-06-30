@@ -1,0 +1,21 @@
+Evaluator supports the following commands: 
+d – Declares a variable with its truth value of either 0 or 1, e.g.:
+    d p = 0
+    d q = 1
+    Leave a space on either side of the equal sign.
+e – Evaluates a formula that only contains previously declared variables, e.g.:
+    e !(p&q)
+    Do NOT leave a space within the formula.
+
+Evaluator supports the following logic operators:
+! – Logical NOT
+& – Logical AND
+| - Logical OR
+> – Logical IMPLY
+- – Logical XNOR, i.e. double implication
+
+Here's an example of a valid source code file:
+d p = 0
+d q = 1
+d r = 1
+e !(p&q)>r

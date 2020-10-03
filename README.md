@@ -1,0 +1,8 @@
+# Logic-C-Compiler
+
+
+After much discussion and design, we are proud to introduce the extension for our project – a formula evaluator for propositional logic. In other words, it is a high-level compiler which reads through a source file containing a logical formula, and generates the corresponding assembly file. By running this assembly file through the assembler and then the emulator, the truth value of this formula can be found in the register $0 of the ARM processor – 0 for false and 1 for true. In this source file, a d instruction declares a variable and assigns it with a truth value, whereas an e instruction tells the evaluator the formula that needs to be evaluated according to the truth values
+
+The evaluator first gets the variables, truth values and the formula from the source file through decode source format(...), and stores them in a heap-allocated array of Assignments and string variable respectively. It then passes the formula into the to tree(...) function, which generates a parse tree for the formula.
+
+Finally, the tree, along with the Assignments, are passed into the write code(...) function. In here, we traverse through the tree three times, almost like a three-pass process, in post-order. First, each variable node in the tree is assigned an ‘index’ or ‘address’ – note the addr attribute in the Node struct. Secondly, each variable node in the tree is assigned to its truth value via the val boolean attribute. Lastly, the tree is evaluated node by node through the evaluate function. Since all the operators are binary (with the exception of NOT), it is relatively straightforward to read a node (the operator) and its two children (the arguments), and thus generate the correct assembly code at each level of the tree.
